@@ -27,5 +27,15 @@ public class Cannon : MonoBehaviour
     void Shoot()
     {
         print("Shoot");
+        GameObject newProjectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, transform.rotation);
+        newProjectile.GetComponent<Rigidbody>().AddForce(projectileSpawnPoint.forward * projectileLaunchSpeed);
+
+
+        float rand = Random.Range(9f, 1.1f);
+        plunk.pitch = rand;
+        plunk.Play();
+
+
+        GameObject.Destroy(newProjectile, 5f);
     }
 }

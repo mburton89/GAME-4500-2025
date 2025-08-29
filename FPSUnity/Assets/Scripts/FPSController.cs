@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FPSController : MonoBehaviour
 {
-    public float moveSpeed = 5.0f;
+    public float moveSpeed = 4.0f;
     public float mouseSensitivity = 2.0f;
     public float jumpForce = 5.0f;
     public Transform playerCamera;
@@ -49,7 +49,7 @@ public class FPSController : MonoBehaviour
         }
         else
         {
-            verticalVelocity -= Time.deltaTime * 10.0f; // Apply gravity
+            verticalVelocity -= Time.deltaTime * 15.0f; // Apply gravity
         }
 
         characterController.Move(movement * Time.deltaTime);
