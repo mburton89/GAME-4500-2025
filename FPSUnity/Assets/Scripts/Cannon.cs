@@ -12,7 +12,6 @@ public class Cannon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -26,6 +25,20 @@ public class Cannon : MonoBehaviour
 
     void Shoot()
     {
-        print("Shoot");
+        print("shoot");
+        GameObject newProjectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, transform.rotation);
+        newProjectile.GetComponent<Rigidbody>().AddForce(transform.up * projectileLaunchSpeed);
+        newProjectile.GetComponent<Rigidbody>().AddForce(transform.up * projectileLaunchSpeed);
+
+        ShootSound();
+
+        Destroy(newProjectile, 5f);
+    }
+
+    void ShootSound()
+    {
+        plunk.pitch = Random.Range(0.8f, 1.2f);
+        plunk.Play();
+
     }
 }

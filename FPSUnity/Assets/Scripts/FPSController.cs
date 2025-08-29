@@ -12,6 +12,8 @@ public class FPSController : MonoBehaviour
     private CharacterController characterController;
     private float verticalRotation = 0;
     private float verticalVelocity = 0;
+    private int currentHealth;
+    private int maxHealth;
 
     private void Start()
     {
@@ -53,5 +55,15 @@ public class FPSController : MonoBehaviour
         }
 
         characterController.Move(movement * Time.deltaTime);
+    }
+
+    public void TakeDamage(int damageDealt)
+    {
+        currentHealth -= damageDealt;
+        if (currentHealth <= 0)
+        {
+            print("game over");
+            currentHealth = maxHealth;
+        }
     }
 }
