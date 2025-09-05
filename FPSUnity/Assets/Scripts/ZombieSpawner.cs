@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ZombieSpawner : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class ZombieSpawner : MonoBehaviour
     public static ZombieSpawner Instance;
 
     public GameObject zombie;
+
+    public TextMeshProUGUI waveNumberText;
 
     private void Start()
     {
