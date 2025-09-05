@@ -298,8 +298,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 7482667652216324306, guid: 8c56016a84d2e1748975051d5c0db4cb, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
@@ -576,8 +576,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 5
-  attackDamage: 2
-  attackSpeed: 0
+  attackDamage: 1
+  attackSpeed: 0.5
   bloodEffect: {fileID: 7283591564623235866, guid: 6ff0337c17dd09a429e14b9e3d07562e, type: 3}
   zombieHealthBar: {fileID: 6771442947668484122}
   hitAudioSource: {fileID: 7298503210503539023}

@@ -24,11 +24,12 @@ public class ZombieSpawner : MonoBehaviour
         
         waveNumber = 1;
 
-        SpawnEnemies(waveNumber);
+        SpawnEnemies();
     }
-    void SpawnEnemies(int waveNumber)
+    void SpawnEnemies()
     {
         Debug.Log("Spawning wave " + waveNumber);
+        waveNumberText.text = "Wave " + waveNumber;
         for (int x = 0; x < waveNumber; x++)
             for (int i = 0; i < zombieSpawnpoints.Count; i++)
                 Instantiate(zombie, zombieSpawnpoints[i].position, transform.rotation, transform);
@@ -37,12 +38,14 @@ public class ZombieSpawner : MonoBehaviour
     public void CountZombies()
     {
         Zombie[] zombiesInScene = FindObjectsOfType<Zombie>();
-        numberOfZombiesRemaining = zombiesInScene.Length;
+        numberOfZombiesRemaining = zombiesInScene.Length - 1;
+        Debug.Log("Counting zombies: "+ numberOfZombiesRemaining);
 
-        if (numberOfZombiesRemaining <= 0)
+        if (numberOfZombiesRemaining < 1)
         {
+            Debug.Log("Spawning next wave");
             waveNumber++;
-            SpawnEnemies(waveNumber);
+            SpawnEnemies();
         }
     }
 }

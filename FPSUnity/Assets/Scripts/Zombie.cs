@@ -55,9 +55,9 @@ public class Zombie : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        print(collision.gameObject.name + " with " + gameObject.name);
         if (collision.gameObject.GetComponent<FPSController>() && canAttack)
         {
+            Debug.Log("Zombie attacking player");
             player.TakeDamage(attackDamage);
             StartCoroutine(AttackCooldown(attackSpeed));
         }

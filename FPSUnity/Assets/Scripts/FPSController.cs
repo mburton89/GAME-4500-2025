@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class FPSController : MonoBehaviour
 {
@@ -16,10 +17,14 @@ public class FPSController : MonoBehaviour
     private int currentHealth;
     public int maxHealth;
 
+    public Image damageFlash;
+
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
+
+        currentHealth = maxHealth;
 
         characterController = GetComponent<CharacterController>();
     }
@@ -60,11 +65,16 @@ public class FPSController : MonoBehaviour
     public void TakeDamage(int damageDealt)
     {
         currentHealth -= damageDealt;
-        print("damage taken");
-        if (currentHealth <= 0)
+        if (currentHealth < 1)
         {
-            print("game over");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+    }
+
+    IEnumerator DamageFlashCooldown()
+    {
+        damageFlash.SetEnabled(true);
+        yield return new WaitForSeconds(0.1f);
+        damageFlash.SetEnabled(false);
     }
 }
