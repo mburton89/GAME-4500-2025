@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Zombie : MonoBehaviour
 { 
-  public float maxHealth;
-  float currentHealth;
-  public AudioSource getHitSound;
-  public GameObject zombieGuts;
+    public float maxHealth;
+    float currentHealth;
+    public AudioSource getHitSound;
+    public GameObject zombieGuts;
 
-  NavMeshAgent agent;
-  Transform target;
+    NavMeshAgent agent;
+    Transform target;
+
+    public Image healthBarFill;
 
     // Start is called before the first frame update
     void Start()
@@ -35,15 +38,21 @@ public class Zombie : MonoBehaviour
       getHitSound.pitch = rand;
       getHitSound.Play();
 
+        healthBarFill.fillAmount = currentHealth / maxHealth;
+
+
       if (currentHealth <= 0)
       {
-        Instantiate(zombieGuts, transform.position, transform.rotation, null);
+        GameObject spawnedZombieGuts = Instantiate(zombieGuts, transform.position, transform.rotation, null);
+        ZombieSpawner.Instance.CountZombies();
         Destroy(gameObject);
-      }
+        Destroy(spawnedZombieGuts, 5);
+        }
     }
 
     void ChasePlayer()
     {
       agent.destination = target.position;
     }
+
 }
