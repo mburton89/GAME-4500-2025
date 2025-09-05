@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Zombie : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class Zombie : MonoBehaviour
     NavMeshAgent agent;
 
     public GameObject gutsPrefab;
+   
+    public Image healthBarFill;
 
     // Start is called before the first frame update
     void Start()
@@ -37,11 +40,15 @@ public class Zombie : MonoBehaviour
         float rand = Random.Range(0.9f, 1.1f);
         impactSound.pitch = rand;
         impactSound.Play();
+
+        healthBarFill.fillAmount = currentHealth / maxHealth;
+
         if(currentHealth <= 0)
         {
             GameObject zombieGuts = Instantiate(gutsPrefab, transform.position, transform.rotation, null);
             Destroy(gameObject);
             Destroy(zombieGuts, 2);
+            ZombieSpawner.Instance.CountZombies();
         }
     }
 

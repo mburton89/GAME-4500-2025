@@ -1,0 +1,53 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+
+public class ZombieSpawner : MonoBehaviour
+{
+    public static ZombieSpawner Instance;
+
+    public GameObject ZombiePrefab;
+    public List<Transform> spawnPoints;
+
+    int wave;
+    public int maxWave;
+
+    public TextMeshProUGUI waveText;
+
+    void Awake()
+    {
+        Instance = this;
+        wave = 1;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public void SpawnWaveOfZombies()
+    {
+        wave++;
+        waveText.SetText("Wave " + wave);
+
+        for(int i = 0;i < wave; i++)
+        {
+            int rand = Random.Range(0, spawnPoints.Count);
+            Instantiate(ZombiePrefab, spawnPoints[rand].position, transform.rotation, transform);
+        }
+
+        //Update HUD w Wave!!
+    }
+
+    public void CountZombies()
+    {
+       Zombie[] allZombiesInScene = FindObjectsOfType<Zombie>();
+
+        if(allZombiesInScene.Length == 1)
+        {
+            SpawnWaveOfZombies();
+        }
+    }    
+}
