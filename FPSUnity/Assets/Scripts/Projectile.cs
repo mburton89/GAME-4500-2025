@@ -13,6 +13,7 @@ public class Projectile : MonoBehaviour
         if(collision.gameObject.GetComponent<Zombie>())
         {
             collision.gameObject.GetComponent<Zombie>().TakeDamage(damageToGive);
+            Destroy(gameObject);
         }
     }
 
