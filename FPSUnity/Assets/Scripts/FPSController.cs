@@ -43,7 +43,6 @@ public class FPSController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                print("jump");
                 verticalVelocity = jumpForce;
             }
         }

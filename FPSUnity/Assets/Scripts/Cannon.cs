@@ -9,6 +9,8 @@ public class Cannon : MonoBehaviour
     public Transform projectileSpawnPoint;
     public AudioSource plunk;
 
+    public List<Transform> ShotgunSpawnpoints;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,10 @@ public class Cannon : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Shoot();
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            Shotgun();
         }
     }
 
@@ -35,5 +41,16 @@ public class Cannon : MonoBehaviour
         plunk.Play();
 
         Destroy(newProjectile, 5);
+    }
+
+    void Shotgun()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            int randInt = Random.Range(0, ShotgunSpawnpoints.Count);
+            GameObject newShotgunProjectile = Instantiate(projectilePrefab, ShotgunSpawnpoints[randInt].position, transform.rotation);
+            newShotgunProjectile.GetComponent<Rigidbody>().AddForce(ShotgunSpawnpoints[randInt].forward * projectileLaunchSpeed);
+        }
+     
     }
 }
