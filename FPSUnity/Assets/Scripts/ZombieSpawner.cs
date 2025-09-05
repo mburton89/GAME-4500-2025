@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ZombieSpawner : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class ZombieSpawner : MonoBehaviour
 
     int wave;
     public int maxWave;
+
+    public TextMeshProUGUI waveText;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -28,6 +32,8 @@ public class ZombieSpawner : MonoBehaviour
     public void SpawnWaveOfZombies()
     {
         wave++;
+        waveText.SetText("Wave: " + wave);
+
         for(int i = 0; i < wave; i++)
         {
             int rand = Random.Range(0, spawnPoints.Count);
