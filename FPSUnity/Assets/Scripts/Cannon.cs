@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Cannon : MonoBehaviour
@@ -8,6 +9,8 @@ public class Cannon : MonoBehaviour
     public float projectileLaunchSpeed;
     public Transform projectileSpawnPoint;
     public AudioSource plunk;
+    public float shootCooldown;
+    private bool canShoot = true;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +20,7 @@ public class Cannon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0) && canShoot) 
         {
             Shoot();
         }
@@ -25,12 +28,13 @@ public class Cannon : MonoBehaviour
 
     void Shoot()
     {
-        print("shoot");
         GameObject newProjectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, transform.rotation);
         newProjectile.GetComponent<Rigidbody>().AddForce(transform.up * projectileLaunchSpeed);
         newProjectile.GetComponent<Rigidbody>().AddForce(transform.up * projectileLaunchSpeed);
 
         ShootSound();
+
+        StartCoroutine(Cooldown(shootCooldown));
 
         Destroy(newProjectile, 5f);
     }
@@ -40,5 +44,12 @@ public class Cannon : MonoBehaviour
         plunk.pitch = Random.Range(0.8f, 1.2f);
         plunk.Play();
 
+    }
+
+    IEnumerator Cooldown(float cooldown)
+    {
+        canShoot = false;
+        yield return new WaitForSeconds(cooldown);
+        canShoot = true; 
     }
 }

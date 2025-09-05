@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 5804226244455045959}
   - component: {fileID: 2987046140452711948}
   - component: {fileID: 4021956107188341339}
+  - component: {fileID: 5860491929769865837}
   m_Layer: 0
   m_Name: zombie guts
   m_TagString: Untagged
@@ -156,7 +157,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1523613, y: 0.1523613, z: 0.1523613}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 224400976443344661}
@@ -235,9 +236,9 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
-  scalingMode: 1
+  scalingMode: 0
   randomSeed: 0
   InitialModule:
     serializedVersion: 3
@@ -416,7 +417,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.77
+      scalar: 1.89
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -733,14 +734,14 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 1000
+    maxNumParticles: 200
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.74
+      scalar: 6.33
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -4122,8 +4123,8 @@ ParticleSystem:
     maxLights: 20
   TrailModule:
     enabled: 1
-    mode: 1
-    ratio: 1
+    mode: 0
+    ratio: 0.19
     lifetime:
       serializedVersion: 2
       minMaxState: 0
@@ -5016,3 +5017,15 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &5860491929769865837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7283591564623235866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47d1d990f7597804b96964ec7d778ef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

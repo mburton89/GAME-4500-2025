@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Zombie : MonoBehaviour
 {
     int currentHealth;
-    public int maxHealth;
-    public int attackDamage;
-    float attackSpeed;
+    public int maxHealth, attackDamage;
+    public float attackSpeed;
     FPSController player;
-    bool canAttack = true;
+    bool canAttack;
     NavMeshAgent navMeshAgent;
     public GameObject bloodEffect;
+    public Image zombieHealthBar;
 
     public AudioSource hitAudioSource;
 
@@ -21,6 +22,7 @@ public class Zombie : MonoBehaviour
         player = FindObjectOfType<FPSController>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         currentHealth = maxHealth;
+        canAttack = true;
     }
 
     private void Update()
@@ -34,27 +36,37 @@ public class Zombie : MonoBehaviour
         hitAudioSource.Play();
 
         currentHealth -= damageDealt;
+
+        zombieHealthBar.fillAmount = (float)currentHealth / maxHealth;
+
         if (currentHealth <= 0)
         {
-            Instantiate(bloodEffect, transform.position, transform.rotation, null);
+            GameObject zombieGutsOnFloor = Instantiate(bloodEffect, transform.position, transform.rotation, null);
+            ZombieSpawner.Instance.CountZombies();
             Destroy(gameObject);
+            Destroy(zombieGutsOnFloor, 2f);
         }
     }
-    void DealDamge(FPSController player)
-    {
-        player.TakeDamage(attackDamage);
-    }
+    
     void ChasePlayer()
     {
         navMeshAgent.SetDestination(player.transform.position);
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-
-        if (collision.gameObject.CompareTag("Player") && canAttack)
+        print(collision.gameObject.name + " with " + gameObject.name);
+        if (collision.gameObject.GetComponent<FPSController>() && canAttack)
         {
-            DealDamge(player);
+            player.TakeDamage(attackDamage);
+            StartCoroutine(AttackCooldown(attackSpeed));
         }
+    }
+
+    IEnumerator AttackCooldown(float cooldown)
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(cooldown);
+        canAttack = true;
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FPSController : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class FPSController : MonoBehaviour
     private float verticalRotation = 0;
     private float verticalVelocity = 0;
     private int currentHealth;
-    private int maxHealth;
+    public int maxHealth;
 
     private void Start()
     {
@@ -45,7 +46,6 @@ public class FPSController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                print("jump");
                 verticalVelocity = jumpForce;
             }
         }
@@ -60,10 +60,11 @@ public class FPSController : MonoBehaviour
     public void TakeDamage(int damageDealt)
     {
         currentHealth -= damageDealt;
+        print("damage taken");
         if (currentHealth <= 0)
         {
             print("game over");
-            currentHealth = maxHealth;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }
