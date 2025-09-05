@@ -32,6 +32,6 @@ public class Cannon : MonoBehaviour
         float rand = Random.Range(0.9f, 1.1f);
         plunk.pitch = rand;
         plunk.Play();
-        Destroy(newProjectile, 5);
+        Destroy(newProjectile, 2);
     }
 }
