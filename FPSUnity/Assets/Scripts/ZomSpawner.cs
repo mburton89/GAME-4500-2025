@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class ZomSpawner : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class ZomSpawner : MonoBehaviour
     public List<Transform> spawnLocations;
 
     private int waveNum;
+
+    public TMP_Text waveText;
 
     private void Awake()
     {
@@ -36,6 +39,7 @@ public class ZomSpawner : MonoBehaviour
 
     public void SpawnWave()
     {
+        waveText.text = waveNum.ToString();
         int m = 5;
         for (int i = 0; i < (waveNum*2)*m; i++)
         {
@@ -59,4 +63,5 @@ public class ZomSpawner : MonoBehaviour
     {
         return waveNum;
     }
+
 }
