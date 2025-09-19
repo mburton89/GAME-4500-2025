@@ -44,7 +44,7 @@ public class Zombie : MonoBehaviour
         if (currentHealth <= 0)
         {
             GameObject spawnedZombieGuts = Instantiate(zombieGuts, transform.position, transform.rotation, null);
-            ZombieSpawner.Instance.CountZombies();
+            ZombieSpawner.Instance.CountZombies(); 
             Destroy(gameObject);
             Destroy(spawnedZombieGuts, 2);
         }
