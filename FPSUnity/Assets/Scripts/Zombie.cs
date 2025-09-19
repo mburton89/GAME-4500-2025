@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Zombie : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class Zombie : MonoBehaviour
     Transform target;
 
     public GameObject zombieGuts;
+
+    public Image healthBarFill;
 
     // Start is called before the first frame update
     void Start()
@@ -36,10 +39,14 @@ public class Zombie : MonoBehaviour
         currentHealth -= damageToTake;
         getHitSound.Play();
 
+        healthBarFill.fillAmount = currentHealth / maxHealth;
+
         if (currentHealth <= 0)
         {
-            Instantiate(zombieGuts, transform.position, transform.rotation, null);
+            GameObject spawnedZombieGuts = Instantiate(zombieGuts, transform.position, transform.rotation, null);
+            ZombieSpawner.Instance.CountZombies(); 
             Destroy(gameObject);
+            Destroy(spawnedZombieGuts, 2);
         }
     }
 
