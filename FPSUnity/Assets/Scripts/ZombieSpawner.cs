@@ -16,11 +16,20 @@ public class ZombieSpawner : MonoBehaviour
 
     public TextMeshProUGUI waveText;
 
+    Transform player;
+
+    public float minDistance = 5;
+
     // Start is called before the first frame update
     void Awake()
     {
         Instance = this;
         wave = 1;
+    }
+
+    private void Start()
+    {
+        player = FindObjectOfType<FPSController>().transform;
     }
 
     // Update is called once per frame
@@ -36,12 +45,24 @@ public class ZombieSpawner : MonoBehaviour
 
         for (int i = 0; i < wave; i++) 
         {
+
             int rand = Random.Range(0, spawnPoints.Count);
-            Instantiate(zombiePrefab, spawnPoints[rand].position, transform.rotation, transform);
+            Vector3 spawnPos = spawnPoints[rand].position;
+            int attempt = 0;
+            int maxAttempt = 10;
+
+            while (Vector3.Distance(spawnPos, player.position) < minDistance && attempt < maxAttempt) 
+            {
+                rand = Random.Range(0, spawnPoints.Count);
+                spawnPos = spawnPoints[rand].position;
+                attempt++;
+            }
+
+            Instantiate(zombiePrefab, spawnPos, transform.rotation, transform);
 
 
         }    
-        //Update Hud with Wave
+        
     }
 
     public void CountZombies() 

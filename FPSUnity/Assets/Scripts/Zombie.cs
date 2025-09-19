@@ -26,6 +26,9 @@ public class Zombie : MonoBehaviour
         target = FindAnyObjectByType<FPSController>().transform;
 
         agent = GetComponent<NavMeshAgent>();
+
+        
+       
     }
 
     // Update is called once per frame
@@ -38,7 +41,7 @@ public class Zombie : MonoBehaviour
     {
         currentHealth -= damageToTake;
         getHitSound.Play();
-
+        
         healthBarFill.fillAmount = currentHealth / maxHealth;
 
         if (currentHealth <= 0) 
