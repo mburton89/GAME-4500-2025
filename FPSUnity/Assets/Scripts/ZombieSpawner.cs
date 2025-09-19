@@ -7,45 +7,64 @@ using TMPro;
 public class ZombieSpawner : MonoBehaviour
 {
     public List<Transform> zombieSpawnpoints;
-    int  numberOfZombiesRemaining;
-
-    private int waveNumber;
-
     public static ZombieSpawner Instance;
-
     public GameObject zombie;
-
     public TextMeshProUGUI waveNumberText;
+    Transform Player;
+
+    public int prepTime, safeDistance;
+    int waveNumber, numberOfZombiesRemaining;
+
 
     private void Start()
     {
         if (Instance == null)
             Instance = this;
-        
+
+        Player = FindObjectOfType<FPSController>().transform;
+
         waveNumber = 1;
 
         SpawnEnemies();
     }
     void SpawnEnemies()
     {
-        Debug.Log("Spawning wave " + waveNumber);
+        if (waveNumber == 1)
+        {
+            StartCoroutine(DoPrepTime());
+        }
         waveNumberText.text = "Wave " + waveNumber;
         for (int x = 0; x < waveNumber; x++)
             for (int i = 0; i < zombieSpawnpoints.Count; i++)
-                Instantiate(zombie, zombieSpawnpoints[i].position, transform.rotation, transform);
+            {
+                int attempts = 10;
+                if ((Player.position - zombieSpawnpoints[i].position).magnitude > safeDistance)
+                    Instantiate(zombie, zombieSpawnpoints[i].position, transform.rotation, transform);
+                else if (attempts > 0)
+                {
+                    attempts--;
+                }
+                else
+                {
+                    break;
+                }
+            }
     }
 
     public void CountZombies()
     {
         Zombie[] zombiesInScene = FindObjectsOfType<Zombie>();
         numberOfZombiesRemaining = zombiesInScene.Length - 1;
-        Debug.Log("Counting zombies: "+ numberOfZombiesRemaining);
 
         if (numberOfZombiesRemaining < 1)
         {
-            Debug.Log("Spawning next wave");
             waveNumber++;
             SpawnEnemies();
         }
+    }
+
+    IEnumerator DoPrepTime()
+    {
+        yield return new WaitForSeconds(prepTime);
     }
 }

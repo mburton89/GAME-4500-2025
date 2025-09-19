@@ -14,8 +14,9 @@ public class Zombie : MonoBehaviour
     NavMeshAgent navMeshAgent;
     public GameObject bloodEffect;
     public Image zombieHealthBar;
-
     public AudioSource hitAudioSource;
+
+    HealthBarVisibility healthBarVisibility;
 
     private void Start()
     {
@@ -23,16 +24,19 @@ public class Zombie : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         currentHealth = maxHealth;
         canAttack = true;
+
+        healthBarVisibility = GetComponentInChildren<HealthBarVisibility>();
     }
 
     private void Update()
     {
         ChasePlayer();
-
     }
 
     public void TakeDamage(int damageDealt) // called by projectile
     {
+        healthBarVisibility.BecomeVisible();
+
         hitAudioSource.Play();
 
         currentHealth -= damageDealt;
@@ -57,7 +61,6 @@ public class Zombie : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<FPSController>() && canAttack)
         {
-            Debug.Log("Zombie attacking player");
             player.TakeDamage(attackDamage);
             StartCoroutine(AttackCooldown(attackSpeed));
         }
