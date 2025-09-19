@@ -112,6 +112,7 @@ Transform:
   m_Children:
   - {fileID: 2473058553329466237}
   - {fileID: 6962348357298682855}
+  - {fileID: 6839838377050735628}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6138741151405229091
@@ -129,7 +130,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 801657890888595335}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -203,6 +204,7 @@ MonoBehaviour:
   getHitSound: {fileID: 1124646570143128103}
   zombieGuts: {fileID: 2666565806486535558, guid: 424d4557ce239dd46afa5676939a6e3d, type: 3}
   healthBarFill: {fileID: 7347749480507548335}
+  healthBar: {fileID: 4401297269625872766}
 --- !u!195 &1395609962727670909
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -233,9 +235,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 801657890888595335}
   serializedVersion: 4
-  m_Mass: 7
+  m_Mass: 9
   m_Drag: 100
-  m_AngularDrag: 5
+  m_AngularDrag: 9
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -558,3 +560,69 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1001 &6440505627407868903
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1795318663002630164}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: e46ef9b9f0629ba4dbb6c77df0dde0d1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e46ef9b9f0629ba4dbb6c77df0dde0d1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.98
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e46ef9b9f0629ba4dbb6c77df0dde0d1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e46ef9b9f0629ba4dbb6c77df0dde0d1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e46ef9b9f0629ba4dbb6c77df0dde0d1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e46ef9b9f0629ba4dbb6c77df0dde0d1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e46ef9b9f0629ba4dbb6c77df0dde0d1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e46ef9b9f0629ba4dbb6c77df0dde0d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e46ef9b9f0629ba4dbb6c77df0dde0d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e46ef9b9f0629ba4dbb6c77df0dde0d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e46ef9b9f0629ba4dbb6c77df0dde0d1, type: 3}
+      propertyPath: m_Name
+      value: Mremireh O Desbiens@Zombie Running
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: e46ef9b9f0629ba4dbb6c77df0dde0d1, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 285a3ec39bcab1349987c3f1c337094e, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e46ef9b9f0629ba4dbb6c77df0dde0d1, type: 3}
+--- !u!4 &6839838377050735628 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e46ef9b9f0629ba4dbb6c77df0dde0d1, type: 3}
+  m_PrefabInstance: {fileID: 6440505627407868903}
+  m_PrefabAsset: {fileID: 0}

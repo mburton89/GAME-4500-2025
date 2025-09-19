@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,8 @@ public class Zombie : MonoBehaviour
     public GameObject zombieGuts;
 
     public Image healthBarFill;
+    public Canvas healthBar;
+    private bool enemyHurt;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +29,8 @@ public class Zombie : MonoBehaviour
         target = FindObjectOfType<FPSController>().transform;
 
         agent = GetComponent<NavMeshAgent>();
+
+        healthBar.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -42,7 +47,17 @@ public class Zombie : MonoBehaviour
         getHitSound.pitch = rand;
         getHitSound.Play();
 
-        healthBarFill.fillAmount = currentHealth / maxHealth; 
+        healthBarFill.fillAmount = currentHealth / maxHealth;
+
+        if (currentHealth < maxHealth)
+        {
+            enemyHurt = true;
+        }
+
+        if (enemyHurt)
+        {
+            healthBar.gameObject.SetActive(true);
+        }
 
         if (currentHealth <= 0)
         {
