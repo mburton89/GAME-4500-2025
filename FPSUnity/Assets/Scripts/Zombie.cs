@@ -37,10 +37,13 @@ public class Zombie : MonoBehaviour
 
     public void TakeDamage(float damageToTake)
     {
+        
+        
         currentHealth -= damageToTake;
         getHitSound.Play();
-
-        healthBarFill.fillAmount = currentHealth / maxHealth;
+        
+      
+        
 
         if (currentHealth <= 0)
         {
