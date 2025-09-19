@@ -15,10 +15,17 @@ public class ZombieSpawner : MonoBehaviour
 
     public TextMeshProUGUI waveText;
 
+    Transform player;
+
     void Awake()
     {
         Instance = this;
         wave = 1;
+    }
+
+    private void Start()
+    {
+        player = FindObjectOfType<FPSController>().transform;
     }
 
     // Update is called once per frame
@@ -35,6 +42,7 @@ public class ZombieSpawner : MonoBehaviour
         for (int i = 0; i < wave; i++)
         {
             int rand = Random.Range(0, spawnPoints.Count);
+            //if player too close to spawnPoints[rand].position, get a new rand
             Instantiate(zombiePrefab, spawnPoints[rand].position, transform.rotation, transform);
         }
 
