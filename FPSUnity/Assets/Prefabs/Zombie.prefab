@@ -331,6 +331,7 @@ MonoBehaviour:
   maxHealth: 10
   getHitSound: {fileID: 9045106131024575579}
   zombieGuts: {fileID: 7014214214916927958, guid: cc88e68e5e8c0124d9431d5ba6cda037, type: 3}
+  healthBar: {fileID: 7997071625625318518}
   healthBarFill: {fileID: 7765473514198012048}
 --- !u!195 &5791089329687568887
 NavMeshAgent:
@@ -342,7 +343,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 1.5
+  m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -364,7 +365,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 5
   m_Drag: 15
-  m_AngularDrag: 2
+  m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}

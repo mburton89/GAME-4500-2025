@@ -16,6 +16,7 @@ public class Zombie : MonoBehaviour
 
     public GameObject zombieGuts;
 
+    public GameObject healthBar;
     public Image healthBarFill;
 
     // Start is called before the first frame update
@@ -24,6 +25,7 @@ public class Zombie : MonoBehaviour
         currentHealth = maxHealth;
         target = FindObjectOfType<FPSController>().transform;
         agent = GetComponent<NavMeshAgent>();
+        healthBar.SetActive(false);
     }
 
     // Update is called once per frame
@@ -36,6 +38,7 @@ public class Zombie : MonoBehaviour
     {
         currentHealth -= damageToTake;
         getHitSound.Play();
+        healthBar.SetActive(true);
         healthBarFill.fillAmount = currentHealth / maxHealth;
         if(currentHealth <= 0)
         {
@@ -43,6 +46,7 @@ public class Zombie : MonoBehaviour
             ZombieSpawner.Instance.CountZombies();
             Destroy(gameObject);
             Destroy(spawnedZombieGuts, 2);
+            healthBar.SetActive(false);
         }
     }
 
