@@ -50,6 +50,12 @@ public class Cannon : MonoBehaviour
             int randInt = Random.Range(0, ShotgunSpawnpoints.Count);
             GameObject newShotgunProjectile = Instantiate(projectilePrefab, ShotgunSpawnpoints[randInt].position, transform.rotation);
             newShotgunProjectile.GetComponent<Rigidbody>().AddForce(ShotgunSpawnpoints[randInt].forward * projectileLaunchSpeed);
+
+            float rand = Random.Range(0.9f, 1.1f);
+            plunk.pitch = rand;
+            plunk.Play();
+
+            Destroy(newShotgunProjectile, 5);
         }
      
     }
