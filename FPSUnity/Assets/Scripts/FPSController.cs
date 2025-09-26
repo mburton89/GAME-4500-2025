@@ -26,7 +26,7 @@ public class FPSController : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Zombie>())
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            GameManager.instance.RestartGame();
         }
     }
 
