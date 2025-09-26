@@ -2680,7 +2680,7 @@ Transform:
   m_GameObject: {fileID: 1261890171}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 35.97, y: 3.1082687, z: 6.6315784}
+  m_LocalPosition: {x: 28.66, y: 3.1082687, z: 6.6315784}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3006,7 +3006,6 @@ MonoBehaviour:
   - {fileID: 309902105}
   - {fileID: 316862254}
   - {fileID: 2090755735}
-  ammoCooldownTime: 0
 --- !u!4 &1499973338
 Transform:
   m_ObjectHideFlags: 0
