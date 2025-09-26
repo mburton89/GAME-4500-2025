@@ -7,10 +7,10 @@ public class ZombieSpawner : MonoBehaviour
 {
     public static ZombieSpawner Instance;
 
-    public GameObject zombiePrefab;
+    public List<GameObject> zombiePrefabs;
     public List<Transform> spawnPoints;
 
-    int wave;
+    public int wave;
     public int maxWave;
 
     public TextMeshProUGUI waveText;
@@ -47,17 +47,17 @@ public class ZombieSpawner : MonoBehaviour
             int attempts = 0;
             int maxAttempts = 10;
 
-            while(Vector3.Distance(spawnPos, player.position) < minDistance && attempts < maxAttempts)
+            while (Vector3.Distance(spawnPos, player.position) < minDistance && attempts < maxAttempts)
             {
                 rand = Random.Range(0, spawnPoints.Count);
                 spawnPos = spawnPoints[rand].position;
                 attempts++;
             }
 
-            Instantiate(zombiePrefab, spawnPos, transform.rotation, transform);
-        }
+            int randZombie = Random.Range(0, zombiePrefabs.Count);
 
-     
+            Instantiate(zombiePrefabs[randZombie], spawnPos, transform.rotation, transform);
+        }
     }
 
     public void CountZombies()

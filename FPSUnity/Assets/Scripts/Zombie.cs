@@ -18,6 +18,8 @@ public class Zombie : MonoBehaviour
 
     public Image healthBarFill;
 
+    public GameObject healthBar;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +50,8 @@ public class Zombie : MonoBehaviour
             Destroy(gameObject);
             Destroy(spawnedZombieGuts, 2);
         }
+
+        healthBar.SetActive(true);
     }
 
     void ChasePlayer()
