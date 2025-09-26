@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class KillPlayer : MonoBehaviour
+public class Ammo : MonoBehaviour
 {
+    public int ammoToGive;
+    public AmmoSpawner parentSpawner;
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.GetComponent<FPSController>())
         {
-            GameManager.Instance.RestartGame();
+            GameManager.Instance.cannon.AddAmmo(ammoToGive);
+            parentSpawner.AmmoRespawn();
+            Destroy(gameObject);
         }
     }
 
@@ -17,7 +21,9 @@ public class KillPlayer : MonoBehaviour
     {
         if (other.gameObject.GetComponent<FPSController>())
         {
-            GameManager.Instance.RestartGame();
+            GameManager.Instance.cannon.AddAmmo(ammoToGive);
+            parentSpawner.AmmoRespawn();
+            Destroy(gameObject);
         }
     }
 }

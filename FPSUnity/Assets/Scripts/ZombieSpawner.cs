@@ -10,7 +10,7 @@ public class ZombieSpawner : MonoBehaviour
     public List<GameObject> zombiePrefabs;
     public List<Transform> spawnPoints;
 
-    int wave;
+    public int wave;
     public int maxWave;
 
     public TextMeshProUGUI waveText;
