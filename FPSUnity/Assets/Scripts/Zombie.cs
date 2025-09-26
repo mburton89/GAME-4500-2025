@@ -17,8 +17,8 @@ public class Zombie : MonoBehaviour
     public GameObject zombieGuts;
 
     public Image healthBarFill;
-
     public GameObject healthBar;
+
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +28,7 @@ public class Zombie : MonoBehaviour
         target = FindObjectOfType<FPSController>().transform;
 
         agent = GetComponent<NavMeshAgent>();
+
     }
 
     // Update is called once per frame
