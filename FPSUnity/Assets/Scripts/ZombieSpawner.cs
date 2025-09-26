@@ -15,6 +15,7 @@ public class ZombieSpawner : MonoBehaviour
     public int maxWave;
 
     public TextMeshProUGUI waveText;
+    public TextMeshProUGUI bestWaveText;
 
     private Transform player;
     public float minDistanceFromPlayer = 5f;
@@ -31,6 +32,7 @@ public class ZombieSpawner : MonoBehaviour
     private void Start()
     {
         player = FindObjectOfType<FPSController>().transform;
+        
     }
 
     // Update is called once per frame
