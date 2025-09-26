@@ -11,7 +11,7 @@ public class Cannon : MonoBehaviour
     public AudioSource plunk;
 
     public int maxAmmo;
-    public int currentAmmo;
+    int currentAmmo;
 
     public static Cannon instance;
 
