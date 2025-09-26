@@ -9,7 +9,7 @@ public class KillPlayer : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<FPSController>())
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            GameManager.Instance.RestartGame(); //NEW
         }
     }
 
@@ -17,7 +17,7 @@ public class KillPlayer : MonoBehaviour
     {
         if (other.gameObject.GetComponent<FPSController>())
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            GameManager.Instance.RestartGame(); //NEW
         }
     }
 }
