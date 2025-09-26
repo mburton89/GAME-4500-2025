@@ -14,11 +14,14 @@ public class FPSController : MonoBehaviour
     private float verticalRotation = 0;
     private float verticalVelocity = 0;
 
+
+    public Cannon cannon;
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
+        
         characterController = GetComponent<CharacterController>();
     }
 
@@ -26,7 +29,7 @@ public class FPSController : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Zombie>())
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            GameManager.Instance.RestartGame();
         }
     }
 

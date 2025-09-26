@@ -12,7 +12,7 @@ public class ZombieSpawner : MonoBehaviour
     public GameObject zombieWalkPrefab; 
     public List<Transform> spawnPoints;
 
-    int wave;
+    public int wave;
     public int maxWave;
 
     public TextMeshProUGUI waveText;
@@ -62,7 +62,7 @@ public class ZombieSpawner : MonoBehaviour
 
 
             Instantiate(zombiePrefab, spawnPos, transform.rotation, transform);
-            Instantiate(zombieWalkPrefab, spawnPos, transform.rotation, transform);
+           
 
         }
 

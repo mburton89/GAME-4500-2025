@@ -17,11 +17,14 @@ public class Zombie : MonoBehaviour
     public GameObject zombieGuts;
 
     public Image healthBarFill;
+    public Image healthBarBackground;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        healthBarBackground.enabled = false;
+        healthBarFill.enabled = false;
         currentHealth = maxHealth;
 
         target = FindObjectOfType<FPSController>().transform;
@@ -37,7 +40,8 @@ public class Zombie : MonoBehaviour
 
     public void TakeDamage(float damageToTake)
     {
-        
+        healthBarBackground.enabled = true;
+        healthBarFill.enabled = true;
         
         currentHealth -= damageToTake;
         getHitSound.Play();
