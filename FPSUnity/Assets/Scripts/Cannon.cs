@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
 
 public class Cannon : MonoBehaviour
 {
@@ -9,16 +11,23 @@ public class Cannon : MonoBehaviour
     public Transform projectileSpawnPoint;
     public AudioSource plunk;
 
-    // Start is called before the first frame update
+    public int MaxAmmo = 50;
+    public int currentAmmo;
+
+    public TextMeshProUGUI ammoText;
+
+
+
     void Start()
     {
-        
+        currentAmmo = MaxAmmo;
+        UpdateAmmoUI();
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && currentAmmo > 0)
         {
             Shoot();
         }
@@ -26,9 +35,13 @@ public class Cannon : MonoBehaviour
 
     void Shoot()
     {
+        currentAmmo--;
+        UpdateAmmoUI();
+
         print("Shoot");
         GameObject newProjectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, transform.rotation);
         newProjectile.GetComponent<Rigidbody>().AddForce(projectileSpawnPoint.forward * projectileLaunchSpeed);
+
 
         float rand = Random.Range(0.9f, 1.1f);
 
@@ -36,4 +49,25 @@ public class Cannon : MonoBehaviour
         plunk.Play();
         Destroy(newProjectile, 5);
     }
+
+
+    public void AddAmmo(int amount)
+    {
+        currentAmmo = Mathf.Min(currentAmmo + amount, MaxAmmo);
+        UpdateAmmoUI();
+    }
+
+    void UpdateAmmoUI()
+    {
+        if (ammoText != null)
+        {
+            ammoText.text = "Ammo: " + currentAmmo + " / " + MaxAmmo;
+        }
+    }
 }
+
+
+
+
+
+

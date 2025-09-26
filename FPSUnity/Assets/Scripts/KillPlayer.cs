@@ -8,16 +8,17 @@ public class KillPlayer : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.GetComponent<FPSController>())
-            {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        {
+            GameManager.Instance.RestartGame();
         }
-    }
+            
+     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<FPSController>())
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            GameManager.Instance.RestartGame();
         }
     }
 }
