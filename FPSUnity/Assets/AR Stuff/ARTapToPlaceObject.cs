@@ -2,30 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
-using UnityEngine.Experimental.XR;
 using Unity.XR.CoreUtils;
-using System;
 using UnityEngine.XR.ARSubsystems;
 
 public class ARTapToPlaceObject : MonoBehaviour
 {
     public GameObject objectToPlace;
     public GameObject placementIndicator;
-
     ARRaycastManager arRaycastManager;
-
-    Pose placementPose; //Pose == Position and Rotation of 3D point in the real world
+    Pose placementPose;
     bool placementPoseIsValid;
 
-    // Start is called before the first frame update
+    private List<Transform> placedSpawnPoints = new List<Transform>();
+    private bool gameStarted = false;
+
     void Start()
     {
         arRaycastManager = FindObjectOfType<ARRaycastManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if (gameStarted) return; // No more placements after game starts
+
         UpdatePlacementPose();
         UpdatePlacementIndicator();
 
@@ -37,7 +36,16 @@ public class ARTapToPlaceObject : MonoBehaviour
 
     private void PlaceObject()
     {
-        Instantiate(objectToPlace, placementPose.position, placementPose.rotation);
+        GameObject newSpawnPoint = Instantiate(objectToPlace, placementPose.position, placementPose.rotation);
+        placedSpawnPoints.Add(newSpawnPoint.transform);
+
+        if (placedSpawnPoints.Count == 3)
+        {
+            ZombieSpawnerAR.Instance.SetSpawnPoints(placedSpawnPoints);
+            ZombieSpawnerAR.Instance.SpawnWaveOfZombies(); // Starts Wave 1 with 1 zombie
+            placementIndicator.SetActive(false);
+            gameStarted = true;
+        }
     }
 
     private void UpdatePlacementIndicator()
@@ -57,16 +65,13 @@ public class ARTapToPlaceObject : MonoBehaviour
     {
         var screenCenter = Camera.current.ViewportToScreenPoint(new Vector3(0.5f, 0.5f));
         var hits = new List<ARRaycastHit>();
+        arRaycastManager.Raycast(screenCenter, hits, TrackableType.PlaneWithinPolygon); // Modern trackable type
 
-        arRaycastManager.Raycast(screenCenter, hits, TrackableType.Planes);
-       
         placementPoseIsValid = hits.Count > 0;
-        
+
         if (placementPoseIsValid)
         {
             placementPose = hits[0].pose;
-
-            //new rotation based on camera rotation so its not rotating in weird directions
             var cameraForward = Camera.current.transform.forward;
             var cameraBearing = new Vector3(cameraForward.x, 0, cameraForward.z).normalized;
             placementPose.rotation = Quaternion.LookRotation(cameraBearing);
