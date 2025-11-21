@@ -6,6 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Matt Level.unity
-    guid: 2f8147a75e32070499be29651622af06
-  m_configObjects: {}
+    path: Assets/AR Stuff/AR Test.unity
+    guid: 58ab779e67dc03a47ab9cdb14a93556c
+  m_configObjects:
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: e225e24ad7410344bb49e890e08f66ef, type: 2}
+    UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 0733add0a6d357e43bfadca659198d3c, type: 2}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 587f95460c5d02f4d9482c183565d744, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 3840f0e04beb9074da9802066c049e21, type: 2}
