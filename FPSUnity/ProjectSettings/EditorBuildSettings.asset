@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Matt Level.unity
-    guid: 2f8147a75e32070499be29651622af06
-  m_configObjects: {}
+    path: Assets/AR Stuff/AR Scene Alex Basi.unity
+    guid: 2430b0c1bb54bee459f47d9169f3bc2a
+  m_configObjects:
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 5d60e104bd0a48941983d098b460c027, type: 2}
+    UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: b99d1170910f4ef439772b36719e4a3a, type: 2}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 4b41fe9cf06be1d40b23e30c6bf30bf5, type: 2}
+    com.unity.xr.magicleap.magic_leap_settings: {fileID: 11400000, guid: e356d164f7d33a5419bbdaa8d8575066, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 4cd4edd640bbc6341be10d31510f8e0d, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: bb331c27346afd44da4e90e57fd1ab1a, type: 2}
