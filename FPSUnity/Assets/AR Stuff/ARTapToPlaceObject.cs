@@ -16,6 +16,8 @@ public class ARTapToPlaceObject : MonoBehaviour
     private List<Transform> placedSpawnPoints = new List<Transform>();
     private bool gameStarted = false;
 
+    public int spawnPointsToPlace;
+
     void Start()
     {
         arRaycastManager = FindObjectOfType<ARRaycastManager>();
@@ -39,12 +41,19 @@ public class ARTapToPlaceObject : MonoBehaviour
         GameObject newSpawnPoint = Instantiate(objectToPlace, placementPose.position, placementPose.rotation);
         placedSpawnPoints.Add(newSpawnPoint.transform);
 
-        if (placedSpawnPoints.Count == 3)
+        if (placedSpawnPoints.Count == spawnPointsToPlace)
         {
-            ZombieSpawnerAR.Instance.SetSpawnPoints(placedSpawnPoints);
-            ZombieSpawnerAR.Instance.SpawnWaveOfZombies(); // Starts Wave 1 with 1 zombie
+            ZombieSpawner.Instance.SetARSpawnPoints(placedSpawnPoints);
+            ZombieSpawner.Instance.SpawnWaveOfZombies(); // Starts Wave 1 with 1 zombie
             placementIndicator.SetActive(false);
             gameStarted = true;
+
+            HideMesh[] meshesToHide = FindObjectsOfType<HideMesh>();
+
+            foreach (HideMesh mesh in meshesToHide)
+            { 
+                mesh.Hide();
+            }
         }
     }
 

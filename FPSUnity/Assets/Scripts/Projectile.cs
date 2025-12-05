@@ -12,10 +12,6 @@ public class Projectile : MonoBehaviour
         {
             collision.gameObject.GetComponent<Zombie>().TakeDamage(damageToGive);
         }
-        if (collision.gameObject.GetComponent<ZombieAR>())
-        {
-            collision.gameObject.GetComponent<ZombieAR>().TakeDamage(damageToGive);
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -23,10 +19,6 @@ public class Projectile : MonoBehaviour
         if (other.gameObject.GetComponent<Zombie>())
         {
             other.gameObject.GetComponent<Zombie>().TakeDamage(damageToGive);
-        }
-        if (other.gameObject.GetComponent<ZombieAR>())
-        {
-            other.gameObject.GetComponent<ZombieAR>().TakeDamage(damageToGive);
         }
     }
 }

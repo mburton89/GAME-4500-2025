@@ -20,12 +20,22 @@ public class Zombie : MonoBehaviour
 
     public GameObject healthBar;
 
+    public bool isARZombie;
+    public float arMoveSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
 
-        target = FindObjectOfType<FPSController>().transform;
+        if (isARZombie)
+        {
+            target = Camera.main.transform;
+        }
+        else
+        { 
+            target = FindObjectOfType<FPSController>().transform;
+        }
 
         agent = GetComponent<NavMeshAgent>();
     }
@@ -33,7 +43,14 @@ public class Zombie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ChasePlayer();
+        if (isARZombie)
+        {
+            ChaseARPlayer();
+        }
+        else
+        { 
+            ChasePlayer();
+        }
     }
 
     public void TakeDamage(float damageToTake)
@@ -57,5 +74,18 @@ public class Zombie : MonoBehaviour
     void ChasePlayer()
     {
         agent.destination = target.position;
+    }
+
+    void ChaseARPlayer()
+    {
+        if (target != null)
+        {
+            // Simple chase: move towards player camera on XZ plane only (no floating)
+            Vector3 direction = (target.position - transform.position);
+            direction.y = 0;  // Lock to ground level
+            direction.Normalize();
+            transform.position += direction * arMoveSpeed * Time.deltaTime;
+            transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
+        }
     }
 }
