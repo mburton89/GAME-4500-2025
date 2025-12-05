@@ -18,6 +18,10 @@ public class ZombieSpawner : MonoBehaviour
     Transform player;
     public float minDistance = 5f;
 
+    public bool isARSpawner;
+
+    public bool gameStarted = false;
+
     void Awake()
     {
         Instance = this;
@@ -26,7 +30,15 @@ public class ZombieSpawner : MonoBehaviour
 
     private void Start()
     {
-        player = FindObjectOfType<FPSController>().transform;
+        if (isARSpawner)
+        {
+            player = Camera.main.transform;
+            minDistance = 0f;
+        }
+        else
+        { 
+            player = FindObjectOfType<FPSController>().transform;
+        }
     }
 
     // Update is called once per frame
@@ -70,5 +82,12 @@ public class ZombieSpawner : MonoBehaviour
         { 
             SpawnWaveOfZombies();
         }
+    }
+
+    internal void SetARSpawnPoints(List<Transform> placedSpawnPoints)
+    {
+        spawnPoints.Clear();
+        spawnPoints.AddRange(placedSpawnPoints);
+        gameStarted = true;
     }
 }

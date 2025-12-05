@@ -17,6 +17,11 @@ public class ARTapToPlaceObject : MonoBehaviour
     Pose placementPose; //Pose == Position and Rotation of 3D point in the real world
     bool placementPoseIsValid;
 
+    public int numberOfSpawnPointsToPlace = 5;
+    public List<Transform> placedSpawnPoints = new List<Transform>();
+
+    public bool gameHasStarted = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +31,8 @@ public class ARTapToPlaceObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameHasStarted) return;
+
         UpdatePlacementPose();
         UpdatePlacementIndicator();
 
@@ -37,7 +44,17 @@ public class ARTapToPlaceObject : MonoBehaviour
 
     private void PlaceObject()
     {
-        Instantiate(objectToPlace, placementPose.position, placementPose.rotation);
+        GameObject newSpawnPoint = Instantiate(objectToPlace, placementPose.position, placementPose.rotation);
+        placedSpawnPoints.Add(newSpawnPoint.transform);
+
+        if (placedSpawnPoints.Count == numberOfSpawnPointsToPlace)
+        {
+            //TODO: Tell Zombie Spawner what the spawn points are
+            ZombieSpawner.Instance.SetARSpawnPoints(placedSpawnPoints);
+            ZombieSpawner.Instance.SpawnWaveOfZombies();
+            placementIndicator.SetActive(false);
+            gameHasStarted = true;
+        }
     }
 
     private void UpdatePlacementIndicator()

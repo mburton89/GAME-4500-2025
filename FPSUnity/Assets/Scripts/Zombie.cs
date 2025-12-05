@@ -20,20 +20,36 @@ public class Zombie : MonoBehaviour
 
     public GameObject healthBar;
 
+    public bool isARZombie;
+    public float arMoveSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
 
-        target = FindObjectOfType<FPSController>().transform;
-
-        agent = GetComponent<NavMeshAgent>();
+        if (isARZombie) //Augmented Reality Mode
+        {
+            target = Camera.main.transform;
+        }
+        else //FPS Computer Mode
+        {
+            target = FindObjectOfType<FPSController>().transform;
+            agent = GetComponent<NavMeshAgent>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        ChasePlayer();
+        if (isARZombie)
+        {
+            ChaseARPlayer();
+        }
+        else 
+        {
+            ChasePlayer();
+        }
     }
 
     public void TakeDamage(float damageToTake)
@@ -57,5 +73,19 @@ public class Zombie : MonoBehaviour
     void ChasePlayer()
     {
         agent.destination = target.position;
+    }
+
+    void ChaseARPlayer()
+    {
+        //Find direction between zombie and player
+        Vector3 direction = target.position - transform.position;
+        direction.y = 0;
+        direction.Normalize();
+
+        //Make Zombie Move
+        transform.position += direction * arMoveSpeed * Time.deltaTime;
+
+        //Make Zombie Look at Player
+        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
     }
 }

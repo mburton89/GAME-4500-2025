@@ -9,6 +9,8 @@ public class Cannon : MonoBehaviour
     public Transform projectileSpawnPoint;
     public AudioSource plunk;
 
+    public Vector3 offsetForce;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +20,9 @@ public class Cannon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!ZombieSpawner.Instance.gameStarted) return;
+
+        if (Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
         {
             Shoot();
         }
@@ -28,7 +32,7 @@ public class Cannon : MonoBehaviour
     {
         print("Shoot");
         GameObject newProjectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, transform.rotation);
-        newProjectile.GetComponent<Rigidbody>().AddForce(projectileSpawnPoint.forward * projectileLaunchSpeed);
+        newProjectile.GetComponent<Rigidbody>().AddForce(projectileSpawnPoint.forward * projectileLaunchSpeed + offsetForce);
 
         float rand = Random.Range(0.9f, 1.1f);
 
